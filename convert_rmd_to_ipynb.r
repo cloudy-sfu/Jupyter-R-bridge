@@ -1,5 +1,43 @@
-rmd_path = choose.files(multi = FALSE, filters = c("R markdown (*.Rmd)", "*.Rmd"))
-if (length(rmd_path) == 1) {
+format_cell <- function(cell_type,
+                        source) {
+  if (cell_type == "code") {
+    x <- list(cell_type = cell_type,
+              execution_count = "",
+              metadata = "",
+              outputs = "",
+              source = source)
+  } else {
+    x <- list(cell_type = cell_type,
+              metadata = "",
+              source = source)
+  }
+  x
+}
+
+
+format_cells <- function(cells) {
+  x <- list(cells = unname(cells),
+            metadata = list(
+              "anaconda-cloud" = "",
+              "kernelspec" = list(
+                "display_name" = "R",
+                "langauge" = "R",
+                "name" = "ir"),
+              "language_info" = list(
+                "codemirror_mode" = "r",
+                "file_extension" = ".r",
+                "mimetype" = "text/x-r-source",
+                "name" = "R",
+                "pygments_lexer" = "r",
+                "version" = "3.4.1")
+            ),
+            "nbformat" = 4,
+            "nbformat_minor" = 1)
+  jsonlite::toJSON(x, auto_unbox = TRUE)
+}
+
+x <- choose.files(multi = FALSE, filters = c("R markdown (*.rmd)", "*.rmd"))
+if (length(x) == 1) {
   # rmd2jupyter function: https://github.com/mkearney/rmd2jupyter
   save_as <- gsub("\\.Rmd", ".ipynb", x)
   con <- file(x)
@@ -56,43 +94,4 @@ if (length(rmd_path) == 1) {
   x <- gsub("outputs\": \"\"", "outputs\": []", x)
   cat(x, file = save_as)
   message(paste("file saved as", save_as))
-}
-
-
-format_cell <- function(cell_type,
-                        source) {
-  if (cell_type == "code") {
-    x <- list(cell_type = cell_type,
-              execution_count = "",
-              metadata = "",
-              outputs = "",
-              source = source)
-  } else {
-    x <- list(cell_type = cell_type,
-              metadata = "",
-              source = source)
-  }
-  x
-}
-
-
-format_cells <- function(cells) {
-  x <- list(cells = unname(cells),
-            metadata = list(
-              "anaconda-cloud" = "",
-              "kernelspec" = list(
-                "display_name" = "R",
-                "langauge" = "R",
-                "name" = "ir"),
-              "language_info" = list(
-                "codemirror_mode" = "r",
-                "file_extension" = ".r",
-                "mimetype" = "text/x-r-source",
-                "name" = "R",
-                "pygments_lexer" = "r",
-                "version" = "3.4.1")
-            ),
-            "nbformat" = 4,
-            "nbformat_minor" = 1)
-  jsonlite::toJSON(x, auto_unbox = TRUE)
 }
