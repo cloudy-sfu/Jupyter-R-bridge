@@ -48,3 +48,6 @@ Install required packages in R. [Reference](https://izoda.github.io/site/anacond
 
 1. Export customized key bindings setting by copying the files in `%APPDATA%/RStudio/keybindings`.
 
+## Acknowledge
+
+[rmd2jupyter](https://github.com/mkearney/rmd2jupyter)
