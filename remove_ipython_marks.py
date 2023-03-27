@@ -5,6 +5,6 @@ filename = input()
 
 with open(filename, "r", encoding="utf-8") as f:
     html = f.read()
-html = re.sub("In&nbsp;\[\d+\]:", "", html)
+html = re.sub("In&nbsp;\[.+\]:", "", html)
 with open(filename, "w", encoding="utf-8") as f:
     f.write(html)
