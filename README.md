@@ -18,32 +18,30 @@ This table lists the difference between exporting Jupyter notebook and knitting 
 
 ### Windows
 
-Install Jupyter Lab. [Reference](https://jupyter.org/install)
 
-1.   Create a python virtual environment at `venv` somewhere. 
-2.   Run `pip install jupyterlab` in the environment.
-
-The executive file is at `venv\Scripts\jupyter-lab.exe`.
 
 Install required packages in R. [Reference](https://izoda.github.io/site/anaconda/r-jupyter-notebook/)
 
-1. Run the following script in R terminal. Replace `...` with the absolute path, to make it the path of Python environment.
+1. Create a python virtual environment. Denote the location is `$venv`.
+2. Run `pip install jupyterlab` in Python environment to install Jupyter Lab. [Reference](https://jupyter.org/install)
+   There should be an executive file `$venv\Scripts\jupyter-lab.exe`.
+3. Run the following script in R terminal, where `$venv` should be absolute path. (i.e. `C:\Users\Administrator\PycharmProjects\R\venv`)
+   It should only use slash `/` and avoid backslash `\`.
 
    ```R
    # Python environment. Use slash '/' only.
-   setwd('.../venv/Scripts')
+   setwd('$venv/Scripts')
    install.packages("IRkernel")
    IRkernel::installspec()
    ```
 
-2. Create a directory `JupyterLab` somewhere to place projects.
-
-3. Start Jupiter Lab: run the following script. (Replace `...` with absolute paths. They can be different.)
+4. Create a directory to save your projects. Denote the location is `$JupyterLab`.
+5. Run the following script to start Jupyter lab.
 
    ```powershell
    netstat -ano | findstr :8888
-   cd ...\JupyterLab
-   ...\venv\Scripts\jupyter-lab.exe --port 8888
+   cd $JupyterLab
+   $venv\Scripts\jupyter-lab.exe --port 8888
    ```
 
 ### Ubuntu 20.04
@@ -80,6 +78,7 @@ Install required packages in R. [Reference](https://izoda.github.io/site/anacond
 4. If you access Ubuntu machine by SSH, run the following command to start Jupyter lab.
 
    ```bash
+   cd ~
    jupyter-lab --port 6007 --no-browser --ip 0.0.0.0
    ```
    
@@ -88,6 +87,7 @@ Install required packages in R. [Reference](https://izoda.github.io/site/anacond
    If you use Ubuntu machine and access Jupyter lab locally (without SSH), run the following command to start Jupyter lab.
    
    ```bash
+   cd ~
    jupyter-lab --port 6007
    ```
    
