@@ -14,9 +14,11 @@ This table lists the difference between exporting Jupyter notebook and knitting 
 | Cannot preview graphs created by `grid` package in R Studio.<br />Write  `grid.newpage()` at the beginning of each chunk. | ✓                | ✗          | ✓    |
 |                                                              |                  |            |      |
 
-## Install R kernel in Jupiter Lab
+## Install R kernel in Jupyter Lab
 
-Install Jupiter Lab. [Reference](https://jupyter.org/install)
+### Windows
+
+Install Jupyter Lab. [Reference](https://jupyter.org/install)
 
 1.   Create a python virtual environment at `venv` somewhere. 
 2.   Run `pip install jupyterlab` in the environment.
@@ -44,10 +46,69 @@ Install required packages in R. [Reference](https://izoda.github.io/site/anacond
    ...\venv\Scripts\jupyter-lab.exe --port 8888
    ```
 
+### Ubuntu 20.04
+
+1. Run the following command to install R 4.x.
+
+   ```bash
+   sudo apt install --no-install-recommends software-properties-common dirmngr
+   wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+   sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+   sudo apt install --no-install-recommends r-base
+   ```
+
+2. If you have `conda`, run the following command. 
+
+   ```bash
+   conda create -n R python=3.11
+   pip install jupyterlab
+   cd ~/.conda/envs/R/bin/
+   R
+   ```
+   
+   Otherwise, please use `pip install jupyterlab` in Python environment and locate to `jupyter-lab` executive file. You can use `which python` to locate Python
+   installation path (denoted as `$venv`) and browse to `$venv/bin/`.
+
+3. In R command line, run the following command to install R kernel for Jupyter lab.
+
+   ```R
+   install.packages("IRkernel")
+   IRkernel::installspec()
+   quit()
+   ```
+
+4. If you access Ubuntu machine by SSH, run the following command to start Jupyter lab.
+
+   ```bash
+   jupyter-lab --port 6007 --no-browser --ip 0.0.0.0
+   ```
+   
+   You can customize the port `6007`, but should not modify IP address `0.0.0.0`.
+   
+   If you use Ubuntu machine and access Jupyter lab locally (without SSH), run the following command to start Jupyter lab.
+   
+   ```bash
+   jupyter-lab --port 6007
+   ```
+   
+   In this case, you have done all the steps.
+   
+5. Start a SSH tunnel:
+
+   ```
+   Local port forwarding
+   Remote server: 0.0.0.0
+   Remote port: 6007
+   Forwarded port: 6007
+   ```
+   
+   SSH server is different according to how you connect to Ubuntu machine.
+   
+
 ## R Studio notes
 
 1. Export customized key bindings setting by copying the files in `%APPDATA%/RStudio/keybindings`.
 
 ## Acknowledge
 
-[rmd2jupyter](https://github.com/mkearney/rmd2jupyter)
+We use [rmd2jupyter](https://github.com/mkearney/rmd2jupyter) to convert `*.Rmd` to `*.ipynb`. The script is modified.
