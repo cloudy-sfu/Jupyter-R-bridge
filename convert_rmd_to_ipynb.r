@@ -1,19 +1,10 @@
-format_cell <- function(cell_type,
-                        source) {
+format_cell <- function(cell_type, source) {
   if (cell_type == "code") {
-    x <- list(cell_type = cell_type,
-              execution_count = "",
-              metadata = "",
-              outputs = "",
-              source = source)
+    return(list(cell_type = cell_type, execution_count = "", metadata = "", outputs = "", source = source))
   } else {
-    x <- list(cell_type = cell_type,
-              metadata = "",
-              source = source)
+    return(list(cell_type = cell_type, metadata = "", source = source))
   }
-  x
 }
-
 
 format_cells <- function(cells) {
   x <- list(cells = unname(cells),
@@ -29,7 +20,7 @@ format_cells <- function(cells) {
                 "mimetype" = "text/x-r-source",
                 "name" = "R",
                 "pygments_lexer" = "r",
-                "version" = "3.4.1")
+                "version" = "4.3.0")
             ),
             "nbformat" = 4,
             "nbformat_minor" = 1)
@@ -79,10 +70,10 @@ if (length(x) == 1) {
   for (i in seq_len(nrow(chunks))) {
     s <- paste0(x[(chunks$start[i]):(chunks$end[i])], "\n")
     ## trim top and bottom blank lines
-    while (s[1] == "\n" & length(s) > 2L) {
+    while (s[1] == "\n" & length(s) > 1L) {
       s <- s[-1]
     }
-    while (s[length(s)] == "\n" & length(s) > 2L) {
+    while (s[length(s)] == "\n" & length(s) > 1L) {
       s <- s[-length(s)]
     }
     chunks$source[i] <- I(list(s))
