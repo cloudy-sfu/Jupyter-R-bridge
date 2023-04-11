@@ -18,15 +18,11 @@ This table lists the difference between exporting Jupyter notebook and knitting 
 
 ### Windows
 
-
-
-Install required packages in R. [Reference](https://izoda.github.io/site/anaconda/r-jupyter-notebook/)
-
 1. Create a python virtual environment. Denote the location is `$venv`.
 2. Run `pip install jupyterlab` in Python environment to install Jupyter Lab. [Reference](https://jupyter.org/install)
    There should be an executive file `$venv\Scripts\jupyter-lab.exe`.
 3. Run the following script in R terminal, where `$venv` should be absolute path. (i.e. `C:\Users\Administrator\PycharmProjects\R\venv`)
-   It should only use slash `/` and avoid backslash `\`.
+   It should only use slash `/` and avoid backslash `\`. [Reference](https://izoda.github.io/site/anaconda/r-jupyter-notebook/)
 
    ```R
    # Python environment. Use slash '/' only.
