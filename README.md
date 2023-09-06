@@ -10,13 +10,12 @@ This table lists the difference between exporting Jupyter notebook and knitting 
 
 | Description                                                  | Jupyter notebook | R markdown | Knit |
 | ------------------------------------------------------------ | ---------------- | ---------- | ---- |
-| `options` method doesn't have effect.<br />It is mainly used to suppress warnings and adjust figure size. Use `{r warning=FALSE}` or `{r fig.width=5,fig.size=5}` to fix it. | ✓                | ✗          | ✗    |
-| Cannot preview graphs created by `grid` package in R Studio.<br />Write  `grid.newpage()` at the beginning of each chunk. | ✓                | ✗          | ✓    |
-|                                                              |                  |            |      |
+| Support `options` command.<br />It is mainly used to suppress warnings and adjust figure size, e.g. `{r warning=FALSE}`, `{r fig.width=5,fig.size=5}`. | ✗                | ✓          | ✓    |
+| Preview graphs created by `grid` library.<br /> In R Studio, write `grid.newpage()` at the beginning of each chunk to fix it. | ✓                | ✗          | ✓    |
 
 ## Install R kernel in Jupyter Lab
 
-### Windows
+### Windows 10
 
 1. Create a python virtual environment. Denote the location is `$venv`.
 2. Run `pip install jupyterlab` in Python environment to install Jupyter Lab. [Reference](https://jupyter.org/install)
